@@ -1,5 +1,5 @@
-import AppVue from "@/App.vue";
 import { createRouter, createWebHistory } from "vue-router";
+import AuthLayoutVue from "../layouts/AuthLayout.vue";
 
 export const isAuthenticated = () => {
 	return localStorage.getItem("token") || false;
@@ -10,33 +10,24 @@ const router = createRouter({
 	routes: [
 		{
 			path: "/",
-			name: "app",
-			component: AppVue,
-			children: [
-				{
-					path: "/",
-					name: "home",
-					component: () => import("../views/Home.vue"),
-					children: [
-						{
-							path: "/",
-							name: "home",
-							component: () => import("../views/Main.vue"),
-						},
-						{
-							path: "/posts",
-							name: "posts",
-							component: () => import("../views/Posts.vue"),
-							meta: { auth: true },
-						},
-					],
-				},
-			],
+			name: "home",
+			component: () => import("../views/Home.vue"),
+		},
+		{
+			path: "/posts",
+			name: "posts",
+			component: () => import("../views/Posts.vue"),
+			meta: {
+				auth: true,
+			},
 		},
 		{
 			path: "/login",
 			name: "login",
 			component: () => import("../views/Login.vue"),
+			meta: {
+				layout: AuthLayoutVue,
+			},
 		},
 	],
 });

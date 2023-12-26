@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { useUsersStore } from "@/stores/users";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 
 const email = ref("");
 const pass = ref("");
-const { loginUser } = useUsersStore();
+const { loginUser, getUsers, users } = useUsersStore();
+
+onMounted(async () => {
+	users.length > 0 ? null : await getUsers();
+});
 </script>
 
 <template>
