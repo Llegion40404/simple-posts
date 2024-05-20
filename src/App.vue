@@ -6,6 +6,7 @@ const route = useRoute();
 </script>
 <template>
 	<div>
+		a little
 		<component :is="route.meta?.layout ? route.meta?.layout : Default">
 		</component>
 	</div>
