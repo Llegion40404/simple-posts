@@ -11,3 +11,6 @@ export type User = {
 	username: string;
 	email: string;
 };
+export type Smth = {
+	smth: string;
+};
